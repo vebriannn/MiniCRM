@@ -1,2 +1,0 @@
-# MiniCRM
-project mini pkl
