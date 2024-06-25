@@ -43,13 +43,12 @@ class LoginController extends Controller
     }
 
     public function logout(Request $requests) {
-
+        
         Auth::logout();
         
         $requests->session()->invalidate();
         $requests->session()->regenerateToken();
 
-        Alert::success('Success', 'Anda Berhasil Logout!!!');
         return redirect()->route('login');
     }
 

@@ -23,7 +23,7 @@ use App\Http\Controllers\View\DivisionController;
 */
 
 // form login dan auth
-Route::get('/login', [LoginController::class, 'index'])->name('login');
+Route::get('/', [LoginController::class, 'index'])->name('login');
 Route::post('/login/check', [LoginController::class, 'login'])->name('login.auth');
 
 // form register dan store
@@ -45,7 +45,7 @@ Route::group(['prefix' => 'view', 'middleware' => 'users.middleware'], function(
     Route::get('/companies/edit/{id}', [DashboardController::class, 'edit'])->name('edit.data.companies');
     Route::put('/companies/updated/{id}', [DashboardController::class, 'update'])->name('edit.data.companies.update');
     
-    Route::post('/companies/delete/{id}', [DashboardController::class, 'deleteCompanies'])->name('delete.data.companies');
+    Route::get('/companies/delete/{id}', [DashboardController::class, 'deleteCompanies'])->name('delete.data.companies');
 
 
 
@@ -57,7 +57,7 @@ Route::group(['prefix' => 'view', 'middleware' => 'users.middleware'], function(
     Route::get('/employees/edit/{id}', [EmployeesController::class, 'edit'])->name('edit.data.employees');
     Route::put('/employees/updated/{id}', [EmployeesController::class, 'update'])->name('edit.data.employees.update');
     
-    Route::post('/employees/delete/{id}', [EmployeesController::class, 'delete'])->name('delete.data.employees');
+    Route::get('/employees/delete/{id}', [EmployeesController::class, 'delete'])->name('delete.data.employees');
 
 
 
@@ -69,5 +69,5 @@ Route::group(['prefix' => 'view', 'middleware' => 'users.middleware'], function(
     Route::get('/divisions/edit/{id}', [DivisionController::class, 'edit'])->name('edit.data.division');
     Route::post('/divisions/update/{id}', [DivisionController::class, 'update'])->name('edit.data.division.update');
     
-    Route::post('/divisions/delete/{id}', [DivisionController::class, 'delete'])->name('delete.data.division');
+    Route::get('/divisions/delete/{id}', [DivisionController::class, 'delete'])->name('delete.data.division');
 });

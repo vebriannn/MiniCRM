@@ -3,45 +3,69 @@
 @section('title', 'Create Data Employees')
 
 @section('content')
-    <div class="container-fluid">
 
-        <form action="{{ route('create.data.employees.store', $CompanyID) }}" method="POST">
-            @csrf
-            <div class="form-group col-sm-2">
-                <label>First Name</label>
-                <input type="text" class="form-control" placeholder="Enter First Name" name="first_name">
-                @error('first_name')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+    <div class="card mx-3">
+        <div class="card-header d-flex justify-content-between">
+            <h4>Create Data Employees</h4>
+            <a href="{{ route('dashboard') }}" class="btn btn-primary ms-2" >Back</a>
+        </div>
+        <div class="card-body">
+            <div class="container-fluid">
+                <form action="{{ route('create.data.employees.store', $CompanyID) }}" method="POST">
+                    @csrf
+                    <div class="row g-2">
+                        <div class="col-md me-3">
+                            <div class="form-floating">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter First Name" name="first_name">
+                                @error('first_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md ms-3">
+                            <div class="form-floating">
+                                <div class="form-floating">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" placeholder="Enter Last Name"
+                                        name="last_name">
+                                    @error('last_name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-2 mt-4">
+                        <div class="col-md me-3">
+                            <div class="form-floating">
+                                <div class="form-floating">
+                                    <label>Email </label>
+                                    <input type="email" class="form-control" placeholder="Enter Email Company"
+                                        name="email">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md ms-3">
+                            <div class="form-floating">
+                                <div class="form-floating">
+                                    <label>Phone</label>
+                                    <input type="text" class="form-control" placeholder="Enter Phone" name="phone">
+                                    @error('phone')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                    </div>
+                </form>
             </div>
-
-            <div class="form-group col-sm-2">
-                <label>Last Name</label>
-                <input type="text" class="form-control" placeholder="Enter Last Name" name="last_name">
-                @error('last_name')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group col-sm-2">
-                <label>Email </label>
-                <input type="email" class="form-control" placeholder="Enter Email Company" name="email">
-                @error('email')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="form-group col-sm-2">
-                <label>Phone</label>
-                <input type="text" class="form-control" placeholder="Enter Phone" name="phone">
-                @error('phone')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <div class="ml-3 mt-3">
-                <button type="submit" class="btn btn-primary ">Submit</button>
-            </div>
-        </form>
+        </div>
     </div>
 @endsection

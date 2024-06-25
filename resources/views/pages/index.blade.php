@@ -8,13 +8,13 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Data Companies</h6>
-                @if(Auth::user()->role != "user")
+                @if (Auth::user()->role != 'user')
                     <a href="{{ route('dashboard.create') }}">Tambah Data</a>
                 @endif
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="companiesTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Name Company</th>
@@ -38,16 +38,14 @@
                                             View Detail
                                         </a>
                                         @if (Auth::user()->role == 'admin')
-                                            <form action="{{ route('delete.data.companies', $item->id) }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            <a href="{{ route('edit.data.companies', $item->id) }}"
+                                                class="btn btn-primary">Edit</a>
                                         @elseif (Auth::user()->role == 'superadmin')
-                                            <a href="{{route('edit.data.companies', $item->id)}}" target="_blank" class="btn btn-primary">Edit</a>
-                                            <form action="{{ route('delete.data.companies', $item->id) }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            <a href="{{ route('edit.data.companies', $item->id) }}"
+                                                class="btn btn-primary">Edit</a>
+
+                                            <a href="{{ route('delete.data.companies', $item->id) }}" class="btn btn-danger"
+                                                id="id-delete">Delete</a>
                                         @endif
                                     </td>
                                 </tr>
@@ -62,4 +60,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#companiesTable').DataTable();
+        });
+    </script>
 @endsection

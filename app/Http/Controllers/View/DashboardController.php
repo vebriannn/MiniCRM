@@ -82,7 +82,7 @@ class DashboardController extends Controller
             $data['logo'] = $getNewNameLogo;
             
             // delete old images
-            Storage::delete('public/imagesLogo'.$companies->logo);
+            Storage::delete('storage/imagesLogo'.$companies->logo);
         }
         
         $companies->update($data);
@@ -95,9 +95,17 @@ class DashboardController extends Controller
 
     public function deleteCompanies($id)
     {
-        Companies::where('id', $id)->first()->delete();
-        Alert::success('Berhasil', 'Data Berhasil Di Hapus');
+        $items = Companies::with('employees')->findOrFail($id);
+        if($items->employees->isEmpty()) {
+            Companies::where('id', $id)->first()->delete();
+            Alert::success('Berhasil', 'Data Companies Berhasil Di Hapus');
+        }
+        else {
+            
+            Alert::error('Gagal', 'Maaf Anda Gagal Menghapus Companies Karena Masih Ada Employees!!!');
+        }
+        
         return redirect()->route('dashboard');
     } 
 
-}
+}   

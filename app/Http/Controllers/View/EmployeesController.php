@@ -19,7 +19,6 @@ class EmployeesController extends Controller
     }
 
 
-
     public function create($id) {
         $CompanyID = $id;
         return view('pages.employees.create', compact('CompanyID'));

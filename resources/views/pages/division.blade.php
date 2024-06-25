@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="divisionsTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Name Divisions</th>
@@ -31,19 +31,17 @@
                                     <td>{{ $item->member }}</td>
                                     @if (Auth::user()->role == 'admin')
                                         <td class="d-flex justify-content-around">
-                                            <form action="{{ route('delete.data.division', $item->id) }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            <a href="{{ route('edit.data.division', $item->id) }}"
+                                                class="btn btn-primary">Edit</a>
                                         </td>
                                     @elseif (Auth::user()->role == 'superadmin')
                                         <td class="d-flex justify-content-around">
-                                            <a href="{{ route('edit.data.division', $item->id) }}" target="_blank"
+                                            <a href="{{ route('edit.data.division', $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
-                                            <form action="{{ route('delete.data.division', $item->id) }}" method="post">
-                                                @csrf
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
+                                            <a href="{{ route('delete.data.division', $item->id) }}" class="btn btn-danger"
+                                                id="id-delete">
+                                                Delete
+                                            </a>
                                         </td>
                                     @endif
 
@@ -59,4 +57,11 @@
             </div>
         </div>
     </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#divisionsTable').DataTable();
+        });
+    </script>
 @endsection
