@@ -39,12 +39,7 @@
                                     <td>{{ $item->last_name }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->phone }}</td>
-                                    @if (Auth::user()->role == 'admin')
-                                        <td class="d-flex justify-content-around">
-                                            <a href="{{ route('edit.data.employees', $item->id) }}"
-                                                class="btn btn-primary">Edit</a>
-                                        </td>
-                                    @elseif (Auth::user()->role == 'superadmin')
+                                    @if (Auth::user()->role != 'user')
                                         <td class="d-flex justify-content-around">
                                             <a href="{{ route('edit.data.employees', $item->id) }}"
                                                 class="btn btn-primary">Edit</a>

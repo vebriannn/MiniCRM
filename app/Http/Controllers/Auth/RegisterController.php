@@ -35,16 +35,14 @@ class RegisterController extends Controller
         $data = $requests->except('_token');
         
         $requests->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
             'role' => 'required',
             'email' => 'required|unique:users,email',
             'password' => 'required',
         ]);
         
         user::create([
-            'first_name' => $requests->first_name,
-            'last_name' => $requests->last_name,
+            'name' => $requests->name,
             'email' => $requests->email,
             'password' => $requests->password,
             'role' => $requests->role

@@ -29,19 +29,14 @@
                                 <tr>
                                     <td>{{ $item->name_division }}</td>
                                     <td>{{ $item->member }}</td>
-                                    @if (Auth::user()->role == 'admin')
+                                    @if (Auth::user()->role != 'user')
                                         <td class="d-flex justify-content-around">
                                             <a href="{{ route('edit.data.division', $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
-                                        </td>
-                                    @elseif (Auth::user()->role == 'superadmin')
-                                        <td class="d-flex justify-content-around">
-                                            <a href="{{ route('edit.data.division', $item->id) }}"
-                                                class="btn btn-primary">Edit</a>
-                                            <a href="{{ route('delete.data.division', $item->id) }}" class="btn btn-danger"
-                                                id="id-delete">
-                                                Delete
-                                            </a>
+                                                <a href="{{ route('delete.data.division', $item->id) }}" class="btn btn-danger"
+                                                    id="id-delete">
+                                                    Delete
+                                                </a>
                                         </td>
                                     @endif
 

@@ -8,7 +8,7 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Data Companies</h6>
-                @if (Auth::user()->role != 'user')
+                @if (Auth::user()->role == 'superadmin')
                     <a href="{{ route('dashboard.create') }}">Tambah Data</a>
                 @endif
             </div>
@@ -37,10 +37,7 @@
                                         <a href="{{ route('view.data.employees', $item->id) }}" class="btn btn-success">
                                             View Detail
                                         </a>
-                                        @if (Auth::user()->role == 'admin')
-                                            <a href="{{ route('edit.data.companies', $item->id) }}"
-                                                class="btn btn-primary">Edit</a>
-                                        @elseif (Auth::user()->role == 'superadmin')
+                                        @if (Auth::user()->role == 'superadmin')
                                             <a href="{{ route('edit.data.companies', $item->id) }}"
                                                 class="btn btn-primary">Edit</a>
 

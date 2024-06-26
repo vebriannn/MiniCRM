@@ -9,17 +9,15 @@ use App\Models\Companies;
 use App\Models\Employees;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
-
 use RealRashid\SweetAlert\Facades\Alert;
+use Yajra\DataTables\Facades\DataTables;
 
 class DashboardController extends Controller
 {
-    public function index() {
+    public function index() { 
         $items = Companies::all();
         return view('pages.index', compact('items'));
     }
-
-
 
     public function create() {
         return view('pages.companies.create');
