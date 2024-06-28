@@ -21,7 +21,7 @@
     <link href="{{ asset('crm/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="{{ asset('crm/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 
 </head>
 
@@ -61,13 +61,10 @@
     </div>
     <!-- End of Page Wrapper -->
 
-
     <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('crm/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('crm/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('crmvendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('crm/js/sb-admin-2.min.js') }}"></script>
@@ -76,11 +73,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('crm/vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('crm/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('crm/js/demo/datatables-demo.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const deleteButtons = document.querySelectorAll('#id-delete');

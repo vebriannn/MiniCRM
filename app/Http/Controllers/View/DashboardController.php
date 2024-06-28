@@ -11,13 +11,15 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
     public function index() { 
-        $items = Companies::all();
-        return view('pages.index', compact('items'));
+        return view('pages.index');
     }
+
+
 
     public function create() {
         return view('pages.companies.create');
@@ -38,14 +40,14 @@ class DashboardController extends Controller
         $getNewNameLogo = Str::random(10).$logo->getClientOriginalName();
         
         $logo->storeAs('public/imagesLogo', $getNewNameLogo);
-
+        
         Companies::create([
             'name' => $requests->name,
             'email' => $requests->email,
             'logo' => $getNewNameLogo,
             'website' => $requests->website,
         ]);
-
+        
         Alert::success('Success', 'Companies Berhasil Di Buat!!!');
         return redirect()->route('dashboard');
     }
@@ -90,7 +92,6 @@ class DashboardController extends Controller
     }
 
 
-
     public function deleteCompanies($id)
     {
         $items = Companies::with('employees')->findOrFail($id);
@@ -105,5 +106,21 @@ class DashboardController extends Controller
         
         return redirect()->route('dashboard');
     } 
+
+
+    public function getDataApi() {
+        $items = Companies::query();
+
+        return DataTables::of($items)
+        ->addColumn('action', function($item) {
+            if (Auth::user()->role == 'superadmin') {
+                return  '<a href="'.route('view.data.employees', $item->id).'" class="btn btn-success">View Detail</a>' .
+                        '<a href="'.route('edit.data.companies', $item->id).'" class="btn btn-primary">Edit</a>' .
+                        '<a href="'.route('delete.data.companies', $item->id).'" class="btn btn-danger" id="id-delete">Delete</a>';
+            } else {
+                return '<a href="'.route('view.data.employees', $item->id).'" class="btn btn-success">View Detail</a>';
+            }
+        })->toJson();
+    }
 
 }   

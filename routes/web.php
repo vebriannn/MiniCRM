@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use Illuminate\Auth\Events\Login;
 
 use App\Http\Controllers\Auth\LoginController;
@@ -64,5 +63,11 @@ Route::group(['prefix' => 'view', 'middleware' => 'users.middleware'], function(
         Route::get('/divisions/delete/{id}', [DivisionController::class, 'delete'])->name('delete.data.division');
     });
 
+    
+    
+});
 
+// Routes Api
+Route::group(['prefix' => 'api', 'middleware' => 'users.middleware'], function() { 
+    Route::get('/v1/companies', [DashboardController::class, 'getDataApi'])->name('api.companies');
 });

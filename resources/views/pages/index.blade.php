@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="companiesTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="myTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Name Company</th>
@@ -24,7 +24,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($items as $item)
+                            {{-- @forelse ($items as $item)
                                 <tr>
                                     <td>
                                         <img src="{{ asset('storage/imagesLogo/' . $item->logo) }}" alt=""
@@ -34,23 +34,13 @@
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->website }}</td>
                                     <td class="d-flex justify-content-around">
-                                        <a href="{{ route('view.data.employees', $item->id) }}" class="btn btn-success">
-                                            View Detail
-                                        </a>
-                                        @if (Auth::user()->role == 'superadmin')
-                                            <a href="{{ route('edit.data.companies', $item->id) }}"
-                                                class="btn btn-primary">Edit</a>
-
-                                            <a href="{{ route('delete.data.companies', $item->id) }}" class="btn btn-danger"
-                                                id="id-delete">Delete</a>
-                                        @endif
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
                                     <td colspan="9" class="text-center">Maaf Data Tidak Tersedia</td>
                                 </tr>
-                            @endforelse
+                            @endforelse --}}
                         </tbody>
                     </table>
                 </div>
@@ -61,7 +51,26 @@
 @section('scripts')
     <script>
         $(document).ready(function() {
-            $('#companiesTable').DataTable();
+            $('#myTable').DataTable({
+                processing: false,
+                serverSide: true,
+                ajax: "{{ route('api.companies') }}",
+                columns: [{
+                        data: 'logo'
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'email'
+                    },
+                    {
+                        data: 'action',
+                        orderable: false,
+                        searchable: false
+                    }
+                ]
+            })
         });
     </script>
 @endsection
